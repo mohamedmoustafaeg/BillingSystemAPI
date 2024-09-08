@@ -1,6 +1,9 @@
 
 using BillingSystem.DataAccess.Context;
+using BillingSystem.DataAccess.Interfaces;
+using BillingSystem.DataAccess.Repositories;
 using Microsoft.EntityFrameworkCore;
+using model.models;
 using System.Text.Json.Serialization;
 
 namespace BillingSystem.API
@@ -26,8 +29,15 @@ namespace BillingSystem.API
             });
             //
             builder.Services.AddScoped<ApplicationDbContext>();
-
-
+            builder.Services.AddScoped<IBaseRepository<Client>, BaseRepository<Client>>();
+            builder.Services.AddScoped<IBaseRepository<Company>, BaseRepository<Company>>();
+            builder.Services.AddScoped<IBaseRepository<Employee>, BaseRepository<Employee>>();
+            builder.Services.AddScoped<IBaseRepository<Invoice>, BaseRepository<Invoice>>();
+            builder.Services.AddScoped<IBaseRepository<Item>, BaseRepository<Item>>();
+            builder.Services.AddScoped<IBaseRepository<ItemInvoice>, BaseRepository<ItemInvoice>>();
+            builder.Services.AddScoped<IBaseRepository<model.models.Type>, BaseRepository<model.models.Type>>();
+            builder.Services.AddScoped<IBaseRepository<Unit>, BaseRepository<Unit>>();
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddCors(corsOptions =>
             {
                 corsOptions.AddPolicy("MyPolicy", CorsPolicyBuilder =>
@@ -43,7 +53,6 @@ namespace BillingSystem.API
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
             app.UseHttpsRedirection();
             app.UseCors("MyPolicy");
 
