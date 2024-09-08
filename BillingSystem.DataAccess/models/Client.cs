@@ -1,13 +1,16 @@
-﻿namespace model.models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace model.models
 {
     public class Client
     {
         public int Id { get; set; }
-        
+        [MaxLength(30)]
         public string Name { get; set; }
+        [MaxLength(200)]
         public string Address { get; set; }
-        public int Number {  get; set; }
-        public int Phone { get; set; }
-        public virtual List<Invoice> Invoices { get; set; }
+        [Length(11, 11)]
+        public string PhoneNumber { get; set; }
+        public virtual List<Invoice>? Invoices { get; set; }
     }
 }
