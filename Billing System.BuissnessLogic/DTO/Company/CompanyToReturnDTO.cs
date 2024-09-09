@@ -1,4 +1,4 @@
-﻿namespace Billing_System.BuissnessLogic.DTO
+﻿namespace Billing_System.BuissnessLogic.DTO.Company
 {
     public class CompanyToReturnDTO
     {

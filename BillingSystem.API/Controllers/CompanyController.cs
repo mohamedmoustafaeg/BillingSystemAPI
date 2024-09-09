@@ -1,4 +1,4 @@
-﻿using Billing_System.BuissnessLogic.DTO;
+﻿using Billing_System.BuissnessLogic.DTO.Company;
 using Billing_System.BuissnessLogic.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
