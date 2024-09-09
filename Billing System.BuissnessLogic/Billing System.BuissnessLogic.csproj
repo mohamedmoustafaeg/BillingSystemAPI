@@ -11,10 +11,4 @@
     <ProjectReference Include="..\BillingSystem.DataAccess\BillingSystem.DataAccess.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Interfaces\" />
-    <Folder Include="DTO\" />
-    <Folder Include="Services\" />
-  </ItemGroup>
-
 </Project>

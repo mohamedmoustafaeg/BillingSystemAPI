@@ -12,7 +12,7 @@ namespace model.models
         public int Quantity { get; set; }
         public int TotalValue { get; set; }
         public int DiscountValue { get; set; }
-        [Range(1, 100)]
+        [Range(0, 100)]
         public int DiscountPercentage { get; set; }
         public int ClientId { get; set; }
         public int EmployeeId { get; set; }

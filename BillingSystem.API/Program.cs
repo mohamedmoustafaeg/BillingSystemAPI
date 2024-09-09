@@ -1,4 +1,6 @@
 
+using Billing_System.BuissnessLogic.Interfaces;
+using Billing_System.BuissnessLogic.Services;
 using BillingSystem.DataAccess.Context;
 using BillingSystem.DataAccess.Interfaces;
 using BillingSystem.DataAccess.Repositories;
@@ -38,6 +40,9 @@ namespace BillingSystem.API
             builder.Services.AddScoped<IBaseRepository<model.models.Type>, BaseRepository<model.models.Type>>();
             builder.Services.AddScoped<IBaseRepository<Unit>, BaseRepository<Unit>>();
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            //services
+            builder.Services.AddScoped<ICompanyService, CompanyService>();
             builder.Services.AddCors(corsOptions =>
             {
                 corsOptions.AddPolicy("MyPolicy", CorsPolicyBuilder =>

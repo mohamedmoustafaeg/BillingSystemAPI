@@ -16,10 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Billing System.BuissnessLogic\Billing System.BuissnessLogic.csproj" />
   </ItemGroup>
 

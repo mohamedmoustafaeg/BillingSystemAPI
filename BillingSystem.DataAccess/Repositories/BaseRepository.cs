@@ -13,32 +13,27 @@ namespace BillingSystem.DataAccess.Repositories
             Context = context;
             DbSet = Context.Set<T>();
         }
-        public void add(T item)
+        public void Add(T item)
         {
             DbSet.Add(item);
         }
 
-        public void delete(T item)
+        public void Delete(T item)
         {
             DbSet.Remove(item);
         }
 
-        public IEnumerable<T> getAll()
+        public IEnumerable<T> GetAll()
         {
             return DbSet.ToList();
         }
 
-        public T getById(int id)
+        public T GetById(int id)
         {
             return DbSet.Find(id);
         }
 
-        public void save()
-        {
-            Context.SaveChanges();
-        }
-
-        public void update(T item)
+        public void Update(T item)
         {
             DbSet.Update(item);
         }
