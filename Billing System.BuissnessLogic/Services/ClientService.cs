@@ -66,5 +66,21 @@ namespace Billing_System.BuissnessLogic.Services
             _context.Clients.Delete(client);
             _context.Complete();
         }
+        public void Edit(int id, ClientToAddDTO client)
+        {
+            if (client == null)
+                throw new Exception("Client can't be null");
+
+            var clientInDb = _context.Clients.GetById(id);
+            if (clientInDb == null)
+                throw new Exception($"No client found with Id {id}");
+
+            clientInDb.Name = client.Name;
+            clientInDb.PhoneNumber = client.PhoneNumber;
+            clientInDb.Address = client.Address;
+
+            _context.Clients.Update(clientInDb);
+            _context.Complete();
+        }
     }
 }

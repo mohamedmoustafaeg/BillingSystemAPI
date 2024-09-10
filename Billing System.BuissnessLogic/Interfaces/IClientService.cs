@@ -8,5 +8,6 @@ namespace Billing_System.BuissnessLogic.Interfaces
         List<ClientToReturnDTO> GetAll();
         ClientToReturnDTO GetById(int id);
         void DeleteById(int id);
+        void Edit(int id, ClientToAddDTO client);
     }
 }

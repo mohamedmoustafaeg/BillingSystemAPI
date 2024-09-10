@@ -80,6 +80,16 @@ namespace Billing_System.BuissnessLogic.Services
             _context.Companies.Update(companyInDB);
             _context.Complete();
         }
+        public CompanyToReturnDTO GetById(int id)
+        {
 
+            var company = _context.Companies.GetById(id);
+            return new CompanyToReturnDTO
+            {
+                Id = company.Id,
+                Name = company.Name,
+                Note = company.Note
+            };
+        }
     }
 }

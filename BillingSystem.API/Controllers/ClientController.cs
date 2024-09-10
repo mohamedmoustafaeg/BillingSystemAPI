@@ -67,5 +67,21 @@ namespace BillingSystem.Presentation.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        [HttpPut("{id}")]
+        public IActionResult EditClient(int id, [FromBody] ClientToAddDTO client)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            try
+            {
+                _service.Edit(id, client);
+                return Ok("Client updated successfully");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

@@ -41,6 +41,14 @@ namespace BillingSystem.Presentation.Controllers
                 return NotFound("No Companies in DataBase");
             return Ok(companies);
         }
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            var company = _service.GetById(id);
+            if (company == null)
+                return NotFound();
+            return Ok(company);
+        }
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
@@ -71,5 +79,6 @@ namespace BillingSystem.Presentation.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
     }
 }
