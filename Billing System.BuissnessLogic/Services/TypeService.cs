@@ -1,13 +1,6 @@
-﻿using Billing_System.BuissnessLogic.DTO.Client;
-using Billing_System.BuissnessLogic.DTO.Type;
+﻿using Billing_System.BuissnessLogic.DTO.Type;
 using Billing_System.BuissnessLogic.Interfaces;
 using BillingSystem.DataAccess.Interfaces;
-using model.models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Billing_System.BuissnessLogic.Services
 {
@@ -25,11 +18,14 @@ namespace Billing_System.BuissnessLogic.Services
             var typeinDb = _context.Types.GetAll().Where(t => t.Name == type.Name).FirstOrDefault();
             if (typeinDb != null)
                 throw new Exception("Type already exists in database");
+            var company = _context.Companies.GetById(type.companyId);
+            if (company == null)
+                throw new Exception($"Company with id {type.companyId} does not exist in database");
             _context.Types.Add(new model.models.Type
             {
                 Name = type.Name,
-                Note = type.Note
-
+                Note = type.Note,
+                CompanyId = type.companyId
             });
             _context.Complete();
         }
@@ -45,7 +41,8 @@ namespace Billing_System.BuissnessLogic.Services
                 {
                     Id = type.Id,
                     Name = type.Name,
-                    Note = type.Note
+                    Note = type.Note,
+                    CompanyName = type.Company.Name
                 });
             }
             return typestoReturn;
@@ -59,7 +56,8 @@ namespace Billing_System.BuissnessLogic.Services
             {
                 Id = type.Id,
                 Name = type.Name,
-                Note = type.Note
+                Note = type.Note,
+                CompanyName = type.Company.Name
             };
         }
         public void DeleteById(int id)
@@ -81,7 +79,7 @@ namespace Billing_System.BuissnessLogic.Services
 
             typeInDb.Name = type.Name;
             typeInDb.Note = type.Note;
-
+            typeInDb.CompanyId = type.companyId;
             _context.Types.Update(typeInDb);
             _context.Complete();
         }

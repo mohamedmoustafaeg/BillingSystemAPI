@@ -1,7 +1,5 @@
-﻿using Billing_System.BuissnessLogic.DTO.Client;
-using Billing_System.BuissnessLogic.DTO.Type;
+﻿using Billing_System.BuissnessLogic.DTO.Type;
 using Billing_System.BuissnessLogic.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BillingSystem.Presentation.Controllers
@@ -40,7 +38,7 @@ namespace BillingSystem.Presentation.Controllers
         public IActionResult GetAll()
         {
             var types = _service.GetAll();
-            if (types == null)
+            if (types.Count() == 0)
                 return NotFound();
             return Ok(types);
         }
