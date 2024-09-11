@@ -13,8 +13,6 @@ namespace BillingSystem.Presentation.Controllers
         {
             _service = service;
         }
-
-        // POST: api/Employee
         [HttpPost]
         public IActionResult AddEmployee(EmployeeToAddDTO employee)
         {
@@ -35,8 +33,6 @@ namespace BillingSystem.Presentation.Controllers
             }
             return BadRequest(ModelState);
         }
-
-        // GET: api/Employee
         [HttpGet]
         public IActionResult GetAll()
         {
@@ -46,8 +42,6 @@ namespace BillingSystem.Presentation.Controllers
 
             return Ok(employees);
         }
-
-        // GET: api/Employee/{id}
         [HttpGet("{id}")]
         public IActionResult GetEmployeeById(int id)
         {
@@ -64,23 +58,19 @@ namespace BillingSystem.Presentation.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
-        // DELETE: api/Employee/{id}
         [HttpDelete("{id}")]
         public IActionResult DeleteEmployee(int id)
         {
             try
             {
                 _service.DeleteById(id);
-                return NoContent(); // Success: Return 204 No Content
+                return NoContent();
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
-
-        // PUT: api/Employee/{id}
         [HttpPut("{id}")]
         public IActionResult EditEmployee(int id, [FromBody] EmployeeToAddDTO employee)
         {
