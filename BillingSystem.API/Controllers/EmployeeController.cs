@@ -37,7 +37,7 @@ namespace BillingSystem.Presentation.Controllers
         public IActionResult GetAll()
         {
             var employees = _service.GetAll();
-            if (employees == null)
+            if (employees.Count() == 0)
                 return NotFound();
 
             return Ok(employees);
