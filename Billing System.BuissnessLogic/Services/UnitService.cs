@@ -45,7 +45,7 @@ namespace Billing_System.BuissnessLogic.Services
 
             // Update the unit's properties
             existingUnit.Name = unitDto.Name;
-
+            _context.Units.Update(existingUnit);
             // Save changes
             _context.Complete();
         }
