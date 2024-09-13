@@ -47,6 +47,8 @@ namespace BillingSystem.API
             builder.Services.AddScoped<IEmployeeService, EmployeeService>();
             builder.Services.AddScoped<ITypeService, TypeService>();
 
+           builder.Services.AddScoped<IUnitService, UnitService>();
+
             builder.Services.AddCors(corsOptions =>
             {
                 corsOptions.AddPolicy("MyPolicy", CorsPolicyBuilder =>
