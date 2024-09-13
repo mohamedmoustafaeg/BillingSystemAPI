@@ -6,7 +6,6 @@ using BillingSystem.DataAccess.Interfaces;
 using BillingSystem.DataAccess.Repositories;
 using Microsoft.EntityFrameworkCore;
 using model.models;
-using System.Text.Json.Serialization;
 
 namespace BillingSystem.API
 {
@@ -15,10 +14,6 @@ namespace BillingSystem.API
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
-            // Add services to the container.
-            builder.Services.AddControllers().AddJsonOptions(x =>
-  x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
