@@ -1,4 +1,5 @@
 ﻿using Billing_System.BuissnessLogic.DTO.Invoice;
+using Billing_System.BuissnessLogic.DTO.ItemInvoice;
 using Billing_System.BuissnessLogic.Interfaces;
 using BillingSystem.DataAccess.Interfaces;
 using model.models;
@@ -55,6 +56,44 @@ namespace Billing_System.BuissnessLogic.Services
                     );
             }
             _context.Complete();
+        }
+
+        public List<InvoiceToReturnDTO> GetAllInvoices()
+        {
+            var invoicesInDb = _context.Invoices.GetAll();
+            if (invoicesInDb == null)
+                throw new Exception("No Invoices Found");
+            var invoices = new List<InvoiceToReturnDTO>();
+            foreach (var invoice in invoicesInDb)
+            {
+
+                var invoiceToAdd = new InvoiceToReturnDTO()
+                {
+                    BillDate = invoice.BillDate,
+                    PaidUp = invoice.PaidUp,
+                    Net = invoice.Net,
+                    DiscountValue = invoice.DiscountValue,
+                    DiscountPercentage = invoice.DiscountPercentage,
+                    BillsTotal = invoice.BillsTotal,
+                    ClientName = invoice.Client.Name,
+                    EmployeeName = invoice.Employee.Name,
+                };
+                invoiceToAdd.Items = new List<ItemInvoiceToReturnDTO>();
+
+                foreach (var item in invoice.ItemInvoices)
+                {
+                    invoiceToAdd.Items.Add(new ItemInvoiceToReturnDTO()
+                    {
+                        ItemName = item.Items.Name,
+                        Quantity = item.Quantity,
+                        Total = item.Total,
+                    });
+                }
+
+                invoices.Add(invoiceToAdd);
+            }
+            return invoices;
+
         }
     }
 }

@@ -5,5 +5,6 @@ namespace Billing_System.BuissnessLogic.Interfaces
     public interface IInvoiceService
     {
         void AddInvoice(InvoiceToAddDTO invoice);
+        List<InvoiceToReturnDTO> GetAllInvoices();
     }
 }

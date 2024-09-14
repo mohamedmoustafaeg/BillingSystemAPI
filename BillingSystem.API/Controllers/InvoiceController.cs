@@ -37,6 +37,13 @@ namespace BillingSystem.Presentation.Controllers
             return BadRequest(ModelState);
 
         }
-
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            var invoices = _service.GetAllInvoices();
+            if (invoices == null)
+                return NotFound();
+            return Ok(invoices);
+        }
     }
 }
