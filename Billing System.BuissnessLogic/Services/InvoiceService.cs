@@ -69,6 +69,7 @@ namespace Billing_System.BuissnessLogic.Services
 
                 var invoiceToAdd = new InvoiceToReturnDTO()
                 {
+                    Id = invoice.Id,
                     BillDate = invoice.BillDate,
                     PaidUp = invoice.PaidUp,
                     Net = invoice.Net,
@@ -93,7 +94,18 @@ namespace Billing_System.BuissnessLogic.Services
                 invoices.Add(invoiceToAdd);
             }
             return invoices;
-
+        }
+        public void DeleteInvoice(int id)
+        {
+            var invoice = _context.Invoices.GetById(id);
+            if (invoice == null)
+                throw new Exception($"No Invoice found with id {id}");
+            foreach (var item in invoice.ItemInvoices)
+            {
+                _context.ItemsInvoices.Delete(item);
+            }
+            _context.Invoices.Delete(invoice);
+            _context.Complete();
         }
     }
 }

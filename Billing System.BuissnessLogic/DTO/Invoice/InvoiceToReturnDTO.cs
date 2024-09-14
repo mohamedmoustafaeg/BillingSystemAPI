@@ -5,6 +5,7 @@ namespace Billing_System.BuissnessLogic.DTO.Invoice
 {
     public class InvoiceToReturnDTO
     {
+        public int Id { get; set; }
         public DateTime BillDate { get; set; } = DateTime.Now;
         public int PaidUp { get; set; }
         [Range(1, int.MaxValue)]

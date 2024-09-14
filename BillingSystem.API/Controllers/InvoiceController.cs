@@ -45,5 +45,11 @@ namespace BillingSystem.Presentation.Controllers
                 return NotFound();
             return Ok(invoices);
         }
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            _service.DeleteInvoice(id);
+            return NoContent();
+        }
     }
 }
