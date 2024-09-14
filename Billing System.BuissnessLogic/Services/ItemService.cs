@@ -26,6 +26,8 @@ namespace Billing_System.BuissnessLogic.Services
             var iteminDb = context.Items.GetAll().Where(c => c.Name == item.Name).FirstOrDefault();
             if (iteminDb != null)
                 throw new Exception("Items already exists in database");
+            if (item.SellingPrice <= item.BuyingPrice)
+                throw new Exception("selling price must be greater than buying price");
             context.Items.Add(new Item
             {
                 Name = item.Name,
@@ -65,6 +67,8 @@ namespace Billing_System.BuissnessLogic.Services
         public ItemToReturnDto GetById(int id)
         {
             var item = context.Items.GetById(id);
+            if (item == null)
+                throw new Exception("this item is not found plz enter a valid Item");
             var itemtoreturn = new ItemToReturnDto
             {
                 Id = item.Id,
