@@ -13,6 +13,7 @@ namespace model.models
         public int DiscountValue { get; set; }
         [Range(0, 100)]
         public int DiscountPercentage { get; set; }
+        public int BillsTotal { get; set; }
         public int ClientId { get; set; }
         public int EmployeeId { get; set; }
         public virtual Client? Client { get; set; }
