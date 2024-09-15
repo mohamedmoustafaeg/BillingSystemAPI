@@ -7,5 +7,7 @@ namespace Billing_System.BuissnessLogic.Interfaces
         void AddInvoice(InvoiceToAddDTO invoice);
         List<InvoiceToReturnDTO> GetAllInvoices();
         void DeleteInvoice(int id);
+        InvoiceToReturnDTO GetInvoiceById(int id);
+        List<InvoiceToReturnDTO> GetInvoicesBetweenDates(DateTime startDate, DateTime endDate);
     }
 }

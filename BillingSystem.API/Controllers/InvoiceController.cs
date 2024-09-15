@@ -51,5 +51,21 @@ namespace BillingSystem.Presentation.Controllers
             _service.DeleteInvoice(id);
             return NoContent();
         }
+        [HttpGet("report")]
+        public IActionResult GetInvoicesBetweentDates(DateTime From, DateTime To)
+        {
+            var invoices = _service.GetInvoicesBetweenDates(From, To);
+            if (invoices == null)
+                return NotFound();
+            return Ok(invoices);
+        }
+        [HttpGet("{id}")]
+        public IActionResult GetInvoiceById(int id)
+        {
+            var invoice = _service.GetInvoiceById(id);
+            if (invoice == null)
+                return NotFound();
+            return Ok(invoice);
+        }
     }
 }

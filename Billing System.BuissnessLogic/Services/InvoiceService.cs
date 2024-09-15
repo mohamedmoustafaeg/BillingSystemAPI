@@ -111,5 +111,76 @@ namespace Billing_System.BuissnessLogic.Services
             _context.Invoices.Delete(invoice);
             _context.Complete();
         }
+
+        public InvoiceToReturnDTO GetInvoiceById(int id)
+        {
+            var invoiceInDb = _context.Invoices.GetById(id);
+            if (invoiceInDb == null)
+                throw new Exception($"No Invoice Found with Id {id}");
+            var invoiceToReturn = new InvoiceToReturnDTO()
+            {
+                Id = invoiceInDb.Id,
+                BillDate = invoiceInDb.BillDate,
+                PaidUp = invoiceInDb.PaidUp,
+                Net = invoiceInDb.Net,
+                DiscountValue = invoiceInDb.DiscountValue,
+                DiscountPercentage = invoiceInDb.DiscountPercentage,
+                BillsTotal = invoiceInDb.BillsTotal,
+                ClientName = invoiceInDb.Client.Name,
+                EmployeeName = invoiceInDb.Employee.Name,
+            };
+            invoiceToReturn.Items = new List<ItemInvoiceToReturnDTO>();
+
+            foreach (var item in invoiceInDb.ItemInvoices)
+            {
+                invoiceToReturn.Items.Add(new ItemInvoiceToReturnDTO()
+                {
+                    ItemName = item.Items.Name,
+                    Quantity = item.Quantity,
+                    Total = item.Total,
+                });
+            }
+
+            return invoiceToReturn;
+
+        }
+
+        public List<InvoiceToReturnDTO> GetInvoicesBetweenDates(DateTime startDate, DateTime endDate)
+        {
+            var invoicesInDb = _context.Invoices.GetAll().Where(i => i.BillDate >= startDate && i.BillDate <= endDate).ToList();
+            if (invoicesInDb == null)
+                throw new Exception("No Invoices Found");
+            var invoices = new List<InvoiceToReturnDTO>();
+            foreach (var invoice in invoicesInDb)
+            {
+
+                var invoiceToAdd = new InvoiceToReturnDTO()
+                {
+                    Id = invoice.Id,
+                    BillDate = invoice.BillDate,
+                    PaidUp = invoice.PaidUp,
+                    Net = invoice.Net,
+                    DiscountValue = invoice.DiscountValue,
+                    DiscountPercentage = invoice.DiscountPercentage,
+                    BillsTotal = invoice.BillsTotal,
+                    ClientName = invoice.Client.Name,
+                    EmployeeName = invoice.Employee.Name,
+                };
+                invoiceToAdd.Items = new List<ItemInvoiceToReturnDTO>();
+
+                foreach (var item in invoice.ItemInvoices)
+                {
+                    invoiceToAdd.Items.Add(new ItemInvoiceToReturnDTO()
+                    {
+                        ItemName = item.Items.Name,
+                        Quantity = item.Quantity,
+                        Total = item.Total,
+                    });
+                }
+
+                invoices.Add(invoiceToAdd);
+            }
+            return invoices;
+        }
     }
 }
