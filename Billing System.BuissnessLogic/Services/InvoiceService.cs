@@ -44,6 +44,11 @@ namespace Billing_System.BuissnessLogic.Services
             _context.Complete();
             foreach (var item in invoice.ItemInvoices)
             {
+                var iteminDB = _context.Items.GetById(item.ItemId);
+                if (iteminDB.AvailableQyantity < item.Quantity)
+                    throw new Exception($"Not available quantity for item with id {item.ItemId}");
+                iteminDB.AvailableQyantity -= item.Quantity;
+                _context.Items.Update(iteminDB);
                 _context.ItemsInvoices.Add(
                     new ItemInvoice()
                     {
@@ -52,7 +57,6 @@ namespace Billing_System.BuissnessLogic.Services
                         Quantity = item.Quantity,
                         Total = item.Total
                     }
-
                     );
             }
             _context.Complete();
