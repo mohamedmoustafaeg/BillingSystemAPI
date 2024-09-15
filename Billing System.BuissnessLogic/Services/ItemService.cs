@@ -83,5 +83,35 @@ namespace Billing_System.BuissnessLogic.Services
             };
             return itemtoreturn;
         }
+        public void DeleteById(int id)
+        {
+            var item = context.Items.GetById(id);
+            if (item == null)
+                throw new Exception("Item is not exist");
+            context.Items.Delete(item);
+            context.Complete(); 
+        }
+        public void Edit(int id,ItemToAddDto item)
+        {
+            if (item == null)
+                throw new Exception("item is empaty(null)");
+            var itemINDb =context.Items.GetById(id);
+            if (itemINDb == null) 
+                throw new Exception("this item is not exist");
+            var itemDuplicationName = context.Items.GetAll().Where(x => x.Name == item.Name).FirstOrDefault();
+            if (itemDuplicationName != null)
+                throw new Exception("this item's name is already exist");
+            itemINDb.Name = item.Name;
+            itemINDb.Note = item.Note;
+            itemINDb.UnitId = item.UnitId;
+            itemINDb.SellingPrice = item.SellingPrice;
+            itemINDb.BuyingPrice = item.BuyingPrice;
+            itemINDb.AvailableQyantity = item.AvailableQyantity;
+            itemINDb.CompanyId = item.CompanyId;
+            itemINDb.TypeId = item.TypeId;
+
+            context.Items.Update(itemINDb);
+            context.Complete();
+        }
     }
 }
