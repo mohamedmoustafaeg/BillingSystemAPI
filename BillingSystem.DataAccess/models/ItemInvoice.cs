@@ -7,7 +7,6 @@
         public int InvoiceId { get; set; }
         public int Quantity { get; set; }
         public int Total { get; set; }
-        public int SellingPrice { get; set; }
         public virtual Invoice? Invoices { get; set; }
         public virtual Item? Items { get; set; }
 

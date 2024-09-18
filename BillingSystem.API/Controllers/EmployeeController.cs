@@ -83,7 +83,7 @@ namespace BillingSystem.Presentation.Controllers
             try
             {
                 _service.Edit(id, employee);
-                return Ok("Employee updated successfully");
+                return Ok(new { message = "Employee updated successfully" });
             }
             catch (Exception ex)
             {

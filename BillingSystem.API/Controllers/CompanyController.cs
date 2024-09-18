@@ -72,7 +72,7 @@ namespace BillingSystem.Presentation.Controllers
             try
             {
                 _service.Edit(id, companyDto);
-                return Ok("Company updated successfully");
+                return Ok(new { message = "Company updated successfully" });
             }
             catch (Exception ex)
             {

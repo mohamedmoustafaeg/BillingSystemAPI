@@ -1,18 +1,11 @@
-﻿using Billing_System.BuissnessLogic.DTO.Client;
-using Billing_System.BuissnessLogic.DTO.Item;
+﻿using Billing_System.BuissnessLogic.DTO.Item;
 using Billing_System.BuissnessLogic.Interfaces;
 using BillingSystem.DataAccess.Interfaces;
-using Microsoft.EntityFrameworkCore;
 using model.models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Billing_System.BuissnessLogic.Services
 {
-    public class Itemervices:IItemService
+    public class Itemervices : IItemService
     {
         public readonly IUnitOfWork context;
         public Itemervices(IUnitOfWork _context)
@@ -43,9 +36,9 @@ namespace Billing_System.BuissnessLogic.Services
             context.Complete();
         }
         public List<ItemToReturnDto> GetAll()
-        { 
-        var items = context.Items.GetAll();
-        var itemstoreturn = new List<ItemToReturnDto>();
+        {
+            var items = context.Items.GetAll();
+            var itemstoreturn = new List<ItemToReturnDto>();
             foreach (var item in items)
             {
                 itemstoreturn.Add(new ItemToReturnDto
@@ -68,7 +61,7 @@ namespace Billing_System.BuissnessLogic.Services
         {
             var item = context.Items.GetById(id);
             if (item == null)
-                throw new Exception("this item is not found plz enter a valid Item");
+                throw new Exception("this item is not found please enter a valid Item");
             var itemtoreturn = new ItemToReturnDto
             {
                 Id = item.Id,
