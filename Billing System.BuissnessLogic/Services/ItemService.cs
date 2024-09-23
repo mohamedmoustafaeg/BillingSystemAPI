@@ -56,9 +56,9 @@ namespace Billing_System.BuissnessLogic.Services
                     SellingPrice = item.SellingPrice,
                     BuyingPrice = item.BuyingPrice,
                     AvailableQyantity = item.AvailableQyantity,
-                    TypeId = item.TypeId,
-                    UnitId = item.TypeId,
-                    CompanyId = item.TypeId
+                    Type = item.Type.Name,
+                    Unit = item.Unit.Name,
+                    Company = item.Company.Name
                 }
                     );
             }
@@ -77,9 +77,9 @@ namespace Billing_System.BuissnessLogic.Services
                 SellingPrice = item.SellingPrice,
                 BuyingPrice = item.BuyingPrice,
                 AvailableQyantity = item.AvailableQyantity,
-                TypeId = item.TypeId,
-                UnitId = item.UnitId,
-                CompanyId = item.CompanyId
+                Type = item.Type.Name,
+                Unit = item.Unit.Name,
+                Company = item.Company.Name
             };
             return itemtoreturn;
         }

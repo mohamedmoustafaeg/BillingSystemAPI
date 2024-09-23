@@ -17,8 +17,8 @@ namespace Billing_System.BuissnessLogic.DTO.Item
         public int BuyingPrice { get; set; }
         [Range(0, int.MaxValue, ErrorMessage = "Selling Price must be greater than or equal to 0")]
         public int SellingPrice { get; set; }
-        public int TypeId { get; set; }
-        public int CompanyId { get; set; }
-        public int UnitId { get; set; }
+        public String Type { get; set; }
+        public String Company { get; set; }
+        public String Unit { get; set; }
     }
 }
