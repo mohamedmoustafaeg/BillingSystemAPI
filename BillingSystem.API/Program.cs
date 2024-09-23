@@ -42,8 +42,9 @@ namespace BillingSystem.API
             builder.Services.AddScoped<IEmployeeService, EmployeeService>();
             builder.Services.AddScoped<ITypeService, TypeService>();
             builder.Services.AddScoped<IItemService, Itemervices>();
+            builder.Services.AddScoped<IInvoiceService, InvoiceService>();
 
-           builder.Services.AddScoped<IUnitService, UnitService>();
+            builder.Services.AddScoped<IUnitService, UnitService>();
 
             builder.Services.AddCors(corsOptions =>
             {

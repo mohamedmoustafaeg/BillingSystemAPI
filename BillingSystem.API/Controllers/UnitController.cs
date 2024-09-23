@@ -1,8 +1,6 @@
 ﻿using Billing_System.BuissnessLogic.DTO.Unit;
 using Billing_System.BuissnessLogic.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Linq;
 
 namespace BillingSystem.Presentation.Controllers
 {
@@ -84,7 +82,7 @@ namespace BillingSystem.Presentation.Controllers
             try
             {
                 _service.Edit(id, unit);
-                return Ok("Unit updated successfully");
+                return Ok(new { message = "Unit updated successfully" });
             }
             catch (Exception ex)
             {

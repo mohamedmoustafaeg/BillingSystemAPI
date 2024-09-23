@@ -1,10 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Billing_System.BuissnessLogic.DTO.ItemInvoice;
+using System.ComponentModel.DataAnnotations;
 
-namespace model.models
+namespace Billing_System.BuissnessLogic.DTO.Invoice
 {
-    public class Invoice
+    public class InvoiceToReturnDTO
     {
-
         public int Id { get; set; }
         public DateTime BillDate { get; set; } = DateTime.Now;
         public int PaidUp { get; set; }
@@ -14,10 +14,9 @@ namespace model.models
         [Range(0, 100)]
         public int DiscountPercentage { get; set; }
         public int BillsTotal { get; set; }
-        public int ClientId { get; set; }
-        public int EmployeeId { get; set; }
-        public virtual Client? Client { get; set; }
-        public virtual Employee? Employee { get; set; }
-        public virtual List<ItemInvoice>? ItemInvoices { get; set; }
+        public string ClientName { get; set; }
+        public string EmployeeName { get; set; }
+        public List<ItemInvoiceToReturnDTO> Items { get; set; }
+
     }
 }

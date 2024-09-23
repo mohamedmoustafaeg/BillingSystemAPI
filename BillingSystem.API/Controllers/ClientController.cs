@@ -76,7 +76,7 @@ namespace BillingSystem.Presentation.Controllers
             try
             {
                 _service.Edit(id, client);
-                return Ok("Client updated successfully");
+                return Ok(new { message = "Client updated successfully" });
             }
             catch (Exception ex)
             {
