@@ -1,11 +1,11 @@
 ﻿using Billing_System.BuissnessLogic.DTO.Item;
 using Billing_System.BuissnessLogic.Interfaces;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using model.models;
 
 namespace BillingSystem.Presentation.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ItemController : ControllerBase
@@ -20,8 +20,8 @@ namespace BillingSystem.Presentation.Controllers
         {
             if (item == null)
                 return BadRequest("item cant be null");
-           
-            if (ModelState.IsValid) 
+
+            if (ModelState.IsValid)
             {
                 try
                 {
