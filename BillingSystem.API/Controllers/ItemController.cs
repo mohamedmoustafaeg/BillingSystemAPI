@@ -1,9 +1,6 @@
-﻿using Billing_System.BuissnessLogic.DTO.Company;
-using Billing_System.BuissnessLogic.DTO.Item;
+﻿using Billing_System.BuissnessLogic.DTO.Item;
 using Billing_System.BuissnessLogic.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using model.models;
 
 namespace BillingSystem.Presentation.Controllers
 {
@@ -21,8 +18,8 @@ namespace BillingSystem.Presentation.Controllers
         {
             if (item == null)
                 return BadRequest("item cant be null");
-           
-            if (ModelState.IsValid) 
+
+            if (ModelState.IsValid)
             {
                 try
                 {
