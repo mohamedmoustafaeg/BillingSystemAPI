@@ -4,8 +4,12 @@ using Billing_System.BuissnessLogic.Services;
 using BillingSystem.DataAccess.Context;
 using BillingSystem.DataAccess.Interfaces;
 using BillingSystem.DataAccess.Repositories;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using model.models;
+using System.Text;
 
 namespace BillingSystem.API
 {
@@ -46,6 +50,40 @@ namespace BillingSystem.API
 
             builder.Services.AddScoped<IUnitService, UnitService>();
 
+            //Identity 
+            builder.Services.AddIdentity<IdentityUser, IdentityRole>(o =>
+            {
+                o.Password.RequireUppercase = false;
+                o.Password.RequireLowercase = false;
+
+            }).AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+            //JWT Configurations
+            //For Authentication
+            builder.Services.AddAuthentication(options =>
+            {
+                /*This specifies that JWT Bearer authentication will be used as the default 
+                 authentication scheme for authenticating and challenging requests.*/
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+
+            }).AddJwtBearer(options =>
+            {
+                // instructs the middleware to save the token in the
+                // authentication properties after a successful authentication.
+                options.SaveToken = true;
+                //allows the use of HTTP (non-HTTPS) requests for token validation. 
+                options.RequireHttpsMetadata = false;
+                options.TokenValidationParameters = new TokenValidationParameters()
+                {
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ValidAudience = builder.Configuration["JWT:ValidAudience"],
+                    ValidIssuer = builder.Configuration["JWT:ValidIssuer"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Secret"]))
+                };
+            });
+
             builder.Services.AddCors(corsOptions =>
             {
                 corsOptions.AddPolicy("MyPolicy", CorsPolicyBuilder =>
@@ -63,7 +101,7 @@ namespace BillingSystem.API
             }
             app.UseHttpsRedirection();
             app.UseCors("MyPolicy");
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
 
