@@ -1,4 +1,5 @@
-﻿using Billing_System.BuissnessLogic.DTO.Item;
+﻿using Billing_System.BuissnessLogic.DTO.Company;
+using Billing_System.BuissnessLogic.DTO.Item;
 using Billing_System.BuissnessLogic.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -51,6 +52,36 @@ namespace BillingSystem.Presentation.Controllers
             {
                 var client = _itemService.GetById(id);
                 return Ok(client);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            try
+            {
+                _itemService.DeleteById(id);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
+        }
+        [HttpPut("{id}")]
+        public IActionResult Edit(int id, [FromBody] ItemToAddDto ITEM)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            try
+            {
+                _itemService.Edit(id, ITEM);
+                return Ok("Item updated successfully");
             }
             catch (Exception ex)
             {

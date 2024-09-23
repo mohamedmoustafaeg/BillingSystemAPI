@@ -12,5 +12,7 @@ namespace Billing_System.BuissnessLogic.Interfaces
         public void Add(ItemToAddDto item);
         public List<ItemToReturnDto> GetAll();
         public ItemToReturnDto GetById(int id);
+        public void Edit(int id, ItemToAddDto item);
+        public void DeleteById(int id);
     }
 }
