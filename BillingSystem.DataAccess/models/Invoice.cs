@@ -15,9 +15,9 @@ namespace model.models
         public int DiscountPercentage { get; set; }
         public int BillsTotal { get; set; }
         public int ClientId { get; set; }
-        public int EmployeeId { get; set; }
+        public int? EmployeeId { get; set; }
         public virtual Client? Client { get; set; }
-        public virtual Employee? Employee { get; set; }
+        //   public virtual Employee? Employee { get; set; }
         public virtual List<ItemInvoice>? ItemInvoices { get; set; }
     }
 }

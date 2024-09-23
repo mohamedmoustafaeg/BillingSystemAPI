@@ -20,9 +20,9 @@ namespace Billing_System.BuissnessLogic.Services
             var client = _context.Clients.GetById(invoice.ClientId);
             if (client == null)
                 throw new Exception($"The client with id ${invoice.ClientId} does not exist");
-            var employee = _context.Employees.GetById(invoice.EmployeeId);
-            if (employee == null)
-                throw new Exception($"Employee with Id {invoice.EmployeeId} does not exist in database");
+            // var employee = _context.Employees.GetById(invoice?.EmployeeId);
+            // if (employee == null)
+            //   throw new Exception($"Employee with Id {invoice.EmployeeId} does not exist in database");
             foreach (var item in invoice.ItemInvoices)
             {
                 var itemInDb = _context.Items.GetById(item.ItemId);
@@ -81,7 +81,7 @@ namespace Billing_System.BuissnessLogic.Services
                     DiscountPercentage = invoice.DiscountPercentage,
                     BillsTotal = invoice.BillsTotal,
                     ClientName = invoice.Client.Name,
-                    EmployeeName = invoice.Employee.Name,
+                    //EmployeeName = invoice.Employee.Name,
                 };
                 invoiceToAdd.Items = new List<ItemInvoiceToReturnDTO>();
 
@@ -127,7 +127,7 @@ namespace Billing_System.BuissnessLogic.Services
                 DiscountPercentage = invoiceInDb.DiscountPercentage,
                 BillsTotal = invoiceInDb.BillsTotal,
                 ClientName = invoiceInDb.Client.Name,
-                EmployeeName = invoiceInDb.Employee.Name,
+                //  EmployeeName = invoiceInDb.Employee.Name,
             };
             invoiceToReturn.Items = new List<ItemInvoiceToReturnDTO>();
 
@@ -164,7 +164,7 @@ namespace Billing_System.BuissnessLogic.Services
                     DiscountPercentage = invoice.DiscountPercentage,
                     BillsTotal = invoice.BillsTotal,
                     ClientName = invoice.Client.Name,
-                    EmployeeName = invoice.Employee.Name,
+                    //      EmployeeName = invoice.Employee.Name,
                 };
                 invoiceToAdd.Items = new List<ItemInvoiceToReturnDTO>();
 
