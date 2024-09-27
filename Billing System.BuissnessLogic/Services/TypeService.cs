@@ -15,7 +15,7 @@ namespace Billing_System.BuissnessLogic.Services
         {
             if (type == null)
                 throw new Exception("Type Can't Be Null");
-            var typeinDb = _context.Types.GetAll().Where(t => t.Name == type.Name).FirstOrDefault();
+            var typeinDb = _context.Types.GetAll().Where(t => t.Name.ToLower() == type.Name.ToLower()).FirstOrDefault();
             if (typeinDb != null)
                 throw new Exception("Type already exists in database");
             var company = _context.Companies.GetById(type.companyId);

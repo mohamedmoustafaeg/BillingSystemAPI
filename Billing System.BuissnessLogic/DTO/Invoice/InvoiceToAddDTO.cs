@@ -7,9 +7,9 @@ namespace Billing_System.BuissnessLogic.DTO.Invoice
     {
 
         public DateTime BillDate { get; set; } = DateTime.Now;
-        public int PaidUp { get; set; }
         [Range(0, int.MaxValue)]
         public int Net { get; set; }
+        public int BillNumber { get; set; }
         [Range(0, int.MaxValue)]
         public int DiscountValue { get; set; }
         [Range(0, 100)]

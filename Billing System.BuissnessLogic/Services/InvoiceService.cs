@@ -20,9 +20,6 @@ namespace Billing_System.BuissnessLogic.Services
             var client = _context.Clients.GetById(invoice.ClientId);
             if (client == null)
                 throw new Exception($"The client with id ${invoice.ClientId} does not exist");
-            // var employee = _context.Employees.GetById(invoice?.EmployeeId);
-            // if (employee == null)
-            //   throw new Exception($"Employee with Id {invoice.EmployeeId} does not exist in database");
             foreach (var item in invoice.ItemInvoices)
             {
                 var itemInDb = _context.Items.GetById(item.ItemId);
@@ -32,8 +29,8 @@ namespace Billing_System.BuissnessLogic.Services
             var invoiceToCreate = new Invoice()
             {
                 BillDate = invoice.BillDate,
-                PaidUp = invoice.PaidUp,
                 Net = invoice.Net,
+                BillNumber = invoice.BillNumber,
                 DiscountPercentage = invoice.DiscountPercentage,
                 DiscountValue = invoice.DiscountValue,
                 BillsTotal = invoice.BillsTotal,
@@ -55,7 +52,9 @@ namespace Billing_System.BuissnessLogic.Services
                         ItemId = item.ItemId,
                         InvoiceId = invoiceToCreate.Id,
                         Quantity = item.Quantity,
-                        Total = item.Total
+                        Total = item.Total,
+                        SellingPrice = item.SellingPrice
+
                     }
                     );
             }
@@ -74,14 +73,13 @@ namespace Billing_System.BuissnessLogic.Services
                 var invoiceToAdd = new InvoiceToReturnDTO()
                 {
                     Id = invoice.Id,
-                    BillDate = invoice.BillDate,
-                    PaidUp = invoice.PaidUp,
+                    BillDate = invoice.BillDate.ToShortDateString(),
                     Net = invoice.Net,
+                    BillNumber = invoice.BillNumber,
                     DiscountValue = invoice.DiscountValue,
                     DiscountPercentage = invoice.DiscountPercentage,
                     BillsTotal = invoice.BillsTotal,
                     ClientName = invoice.Client.Name,
-                    //EmployeeName = invoice.Employee.Name,
                 };
                 invoiceToAdd.Items = new List<ItemInvoiceToReturnDTO>();
 
@@ -92,9 +90,9 @@ namespace Billing_System.BuissnessLogic.Services
                         ItemName = item.Items.Name,
                         Quantity = item.Quantity,
                         Total = item.Total,
+                        SellingPrice = item.SellingPrice
                     });
                 }
-
                 invoices.Add(invoiceToAdd);
             }
             return invoices;
@@ -120,14 +118,13 @@ namespace Billing_System.BuissnessLogic.Services
             var invoiceToReturn = new InvoiceToReturnDTO()
             {
                 Id = invoiceInDb.Id,
-                BillDate = invoiceInDb.BillDate,
-                PaidUp = invoiceInDb.PaidUp,
+                BillDate = invoiceInDb.BillDate.ToShortDateString(),
                 Net = invoiceInDb.Net,
+                BillNumber = invoiceInDb.BillNumber,
                 DiscountValue = invoiceInDb.DiscountValue,
                 DiscountPercentage = invoiceInDb.DiscountPercentage,
                 BillsTotal = invoiceInDb.BillsTotal,
                 ClientName = invoiceInDb.Client.Name,
-                //  EmployeeName = invoiceInDb.Employee.Name,
             };
             invoiceToReturn.Items = new List<ItemInvoiceToReturnDTO>();
 
@@ -138,11 +135,10 @@ namespace Billing_System.BuissnessLogic.Services
                     ItemName = item.Items.Name,
                     Quantity = item.Quantity,
                     Total = item.Total,
+                    SellingPrice = item.SellingPrice
                 });
             }
-
             return invoiceToReturn;
-
         }
 
         public List<InvoiceToReturnDTO> GetInvoicesBetweenDates(DateTime startDate, DateTime endDate)
@@ -157,14 +153,13 @@ namespace Billing_System.BuissnessLogic.Services
                 var invoiceToAdd = new InvoiceToReturnDTO()
                 {
                     Id = invoice.Id,
-                    BillDate = invoice.BillDate,
-                    PaidUp = invoice.PaidUp,
+                    BillDate = invoice.BillDate.ToShortDateString(),
                     Net = invoice.Net,
                     DiscountValue = invoice.DiscountValue,
                     DiscountPercentage = invoice.DiscountPercentage,
                     BillsTotal = invoice.BillsTotal,
+                    BillNumber = invoice.BillNumber,
                     ClientName = invoice.Client.Name,
-                    //      EmployeeName = invoice.Employee.Name,
                 };
                 invoiceToAdd.Items = new List<ItemInvoiceToReturnDTO>();
 
@@ -174,6 +169,7 @@ namespace Billing_System.BuissnessLogic.Services
                     {
                         ItemName = item.Items.Name,
                         Quantity = item.Quantity,
+                        SellingPrice = item.SellingPrice,
                         Total = item.Total,
                     });
                 }

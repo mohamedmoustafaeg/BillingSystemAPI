@@ -18,7 +18,7 @@ namespace Billing_System.BuissnessLogic.Services
             if (employee == null)
                 throw new Exception("Employee can't be null");
 
-            var employeeInDb = _context.Employees.GetAll().Where(e => e.Name == employee.Name).FirstOrDefault();
+            var employeeInDb = _context.Employees.GetAll().Where(e => e.Name.ToLower() == employee.Name.ToLower()).FirstOrDefault();
             if (employeeInDb != null)
                 throw new Exception("Employee already exists in the database");
 

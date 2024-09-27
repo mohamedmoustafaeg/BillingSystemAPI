@@ -16,7 +16,7 @@ namespace Billing_System.BuissnessLogic.Services
         {
             if (client == null)
                 throw new Exception("Client Cant Be Null");
-            var clientinDb = _context.Clients.GetAll().Where(c => c.Name == client.Name).FirstOrDefault();
+            var clientinDb = _context.Clients.GetAll().Where(c => c.Name.ToLower() == client.Name.ToLower()).FirstOrDefault();
             if (clientinDb != null)
                 throw new Exception("Client already exists in database");
             _context.Clients.Add(new Client

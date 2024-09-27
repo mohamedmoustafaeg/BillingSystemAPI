@@ -16,7 +16,7 @@ namespace Billing_System.BuissnessLogic.Services
         {
             if (item == null)
                 throw new Exception("item Cant Be Null");
-            var iteminDb = context.Items.GetAll().Where(c => c.Name == item.Name).FirstOrDefault();
+            var iteminDb = context.Items.GetAll().Where(c => c.Name.ToLower() == item.Name.ToLower()).FirstOrDefault();
             if (iteminDb != null)
                 throw new Exception("Items already exists in database");
             if (item.SellingPrice <= item.BuyingPrice)
@@ -82,14 +82,14 @@ namespace Billing_System.BuissnessLogic.Services
             if (item == null)
                 throw new Exception("Item is not exist");
             context.Items.Delete(item);
-            context.Complete(); 
+            context.Complete();
         }
-        public void Edit(int id,ItemToAddDto item)
+        public void Edit(int id, ItemToAddDto item)
         {
             if (item == null)
                 throw new Exception("item is empaty(null)");
-            var itemINDb =context.Items.GetById(id);
-            if (itemINDb == null) 
+            var itemINDb = context.Items.GetById(id);
+            if (itemINDb == null)
                 throw new Exception("this item is not exist");
             var itemDuplicationName = context.Items.GetAll().Where(x => x.Name == item.Name).FirstOrDefault();
             if (itemDuplicationName != null)

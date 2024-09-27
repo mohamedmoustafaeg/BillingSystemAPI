@@ -17,7 +17,7 @@ namespace Billing_System.BuissnessLogic.Services
         {
             if (company == null)
                 throw new Exception("Error Company Is Null");
-            var companyInDB = _context.Companies.GetAll().Where(c => c.Name == company.Name).FirstOrDefault();
+            var companyInDB = _context.Companies.GetAll().Where(c => c.Name.ToLower() == company.Name.ToLower()).FirstOrDefault();
             if (companyInDB != null)
                 throw new Exception("Company name Already Exists in Database");
             Company companyToAdd = new Company()

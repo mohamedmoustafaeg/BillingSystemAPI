@@ -19,14 +19,16 @@ namespace Billing_System.BuissnessLogic.Services
                 throw new ArgumentNullException(nameof(unitDto), "Unit data can't be null");
 
             // Check if the unit already exists
-            var existingUnit = _context.Units.GetAll().FirstOrDefault(u => u.Name == unitDto.Name);
+            var existingUnit = _context.Units.GetAll().FirstOrDefault(u => u.Name.ToLower() == unitDto.Name.ToLower());
             if (existingUnit != null)
                 throw new InvalidOperationException("Unit already exists in the database");
 
             // Create new Unit with just the Name
             var unit = new model.models.Unit
             {
-                Name = unitDto.Name
+                Name = unitDto.Name,
+                Notes = unitDto.Notes
+
             };
 
             // Add the new unit to the database
@@ -59,7 +61,8 @@ namespace Billing_System.BuissnessLogic.Services
             return new UnitToReturnDTO
             {
                 Id = unit.Id,
-                Name = unit.Name
+                Name = unit.Name,
+                Notes = unit.Notes
             };
         }
         public List<UnitToReturnDTO> GetAll()
@@ -70,7 +73,8 @@ namespace Billing_System.BuissnessLogic.Services
             var unitDtos = units.Select(u => new UnitToReturnDTO
             {
                 Id = u.Id,
-                Name = u.Name
+                Name = u.Name,
+                Notes = u.Notes
             }).ToList();
 
             return unitDtos;
