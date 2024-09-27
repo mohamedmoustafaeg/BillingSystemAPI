@@ -80,7 +80,7 @@ namespace BillingSystem.Presentation.Controllers
             try
             {
                 _itemService.Edit(id, ITEM);
-                return Ok("Item updated successfully");
+                return Ok(new { message = "item updated successfully" });
             }
             catch (Exception ex)
             {
