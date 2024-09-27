@@ -1,11 +1,9 @@
 ﻿using Billing_System.BuissnessLogic.DTO.Invoice;
 using Billing_System.BuissnessLogic.Interfaces;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BillingSystem.Presentation.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class InvoiceController : ControllerBase
