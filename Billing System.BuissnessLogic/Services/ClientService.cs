@@ -23,7 +23,9 @@ namespace Billing_System.BuissnessLogic.Services
             {
                 Name = client.Name,
                 PhoneNumber = client.PhoneNumber,
-                Address = client.Address
+                Address = client.Address,
+                Number = client.Number
+
 
             });
             _context.Complete();
@@ -40,7 +42,8 @@ namespace Billing_System.BuissnessLogic.Services
                     Id = client.Id,
                     Name = client.Name,
                     PhoneNumber = client.PhoneNumber,
-                    Address = client.Address
+                    Address = client.Address,
+                    Number = client.Number
                 });
             }
             return clientstoReturn;
@@ -55,7 +58,8 @@ namespace Billing_System.BuissnessLogic.Services
                 Id = client.Id,
                 Name = client.Name,
                 PhoneNumber = client.PhoneNumber,
-                Address = client.Address
+                Address = client.Address,
+                Number = client.Number
             };
         }
         public void DeleteById(int id)

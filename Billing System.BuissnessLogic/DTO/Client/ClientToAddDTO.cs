@@ -11,5 +11,6 @@ namespace Billing_System.BuissnessLogic.DTO.Client
         public string Address { get; set; }
         [Length(11, 11)]
         public string PhoneNumber { get; set; }
+        public int Number { get; set; }
     }
 }
