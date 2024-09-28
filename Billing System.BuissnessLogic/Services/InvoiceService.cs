@@ -26,6 +26,12 @@ namespace Billing_System.BuissnessLogic.Services
                 if (itemInDb == null)
                     throw new Exception($"Item with Id {item.ItemId} does not exist in database");
             }
+            foreach (var item in invoice.ItemInvoices)
+            {
+                var iteminDB = _context.Items.GetById(item.ItemId);
+                if (iteminDB.AvailableQyantity < item.Quantity)
+                    throw new Exception($"Not available quantity for item with id {item.ItemId}");
+            }
             var invoiceToCreate = new Invoice()
             {
                 BillDate = invoice.BillDate,
@@ -42,8 +48,6 @@ namespace Billing_System.BuissnessLogic.Services
             foreach (var item in invoice.ItemInvoices)
             {
                 var iteminDB = _context.Items.GetById(item.ItemId);
-                if (iteminDB.AvailableQyantity < item.Quantity)
-                    throw new Exception($"Not available quantity for item with id {item.ItemId}");
                 iteminDB.AvailableQyantity -= item.Quantity;
                 _context.Items.Update(iteminDB);
                 _context.ItemsInvoices.Add(

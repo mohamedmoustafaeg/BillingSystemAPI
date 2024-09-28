@@ -30,7 +30,7 @@ namespace BillingSystem.Presentation.Controllers
                 catch (Exception ex)
                 {
                     ModelState.TryAddModelError("error", ex.Message);
-
+                    return BadRequest(ex.Message);
                 }
 
             }
